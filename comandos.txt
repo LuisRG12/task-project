@@ -1,0 +1,57 @@
+#Migraciones
+
+php artisan migrate --database=task_connection --path=modules/TaskModule/Database/Migrations
+
+
+'TMconnection' => [
+        'driver' => 'mysql',
+        'host' => env('DB_TM_HOST', '127.0.0.1'),
+        'port' => env('DB_TM_PORT', '3306'),
+        'database' => env('DB_TM_DATABASE', 'forge'),
+        'username' => env('DB_TM_USERNAME', 'forge'),
+        'password' => env('DB_TM_PASSWORD', ''),
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix' => '',
+        'strict' => true,
+        'engine' => null,
+    ],
+
+DB_TM_HOST=127.0.0.1
+DB_TM_PORT=3306
+DB_TM_DATABASE=nombre_de_tu_base_de_datos
+DB_TM_USERNAME=tu_usuario
+DB_TM_PASSWORD=tu_contraseña
+
+#Vite configç
+
+npm install vite laravel-vite-plugin --save-dev
+
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: [
+                'resources/css/app.css',
+                'resources/js/app.js',
+                'resources/js/task-loads.js'
+            ],
+            refresh: true,
+        }),
+    ],
+});
+
+
+npm install vite --save-dev
+php artisan make:provider NombreDelProvider
+
+{
+    "autoload": {
+        "psr-4": {
+            "Modules\\TaskModule\\": "Modules/TaskModule/"
+        }
+    }
+}
+composer dump-autoload
